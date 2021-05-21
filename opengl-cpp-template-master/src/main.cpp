@@ -21,7 +21,7 @@ int main()
 #endif
 	// glfw window creation
 	// --------------------
-	GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearningOpengl", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -36,6 +36,7 @@ int main()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
+	
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
@@ -46,7 +47,7 @@ int main()
 
 		// render
 		// ------
-		 glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -63,7 +64,8 @@ int main()
 void processInput(GLFWwindow *window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
+	{	glfwSetWindowShouldClose(window, true);
+    }
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
