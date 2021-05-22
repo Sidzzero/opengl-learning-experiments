@@ -47,11 +47,14 @@ int main()
 
 		// render
 		// ------
+		//Create a new color for background
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		//Clean back buffer and assign new color
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
+		//Swap back buffer to front
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
