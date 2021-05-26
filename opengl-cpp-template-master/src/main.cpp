@@ -37,6 +37,26 @@ int main()
 		return -1;
 	}
 	
+// -- vertices setup
+GLfloat vertices[] = 
+{
+	-0.5f,-0.5f,0.0f,
+	0.0f,0.5f,0.0f,
+	0.5f,-0.5f,0.0f
+};
+
+unsigned int VAO,VBO;
+glGenVertexArrays(1,&VAO);
+
+glGenBuffers(1,&VBO);
+glBindBuffer(GL_ARRAY_BUFFER,VBO);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
+
+glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(GLfloat),(void*)0);
+glEnableVertexAttribArray(0);
+
+
+
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
@@ -51,6 +71,9 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		//Clean back buffer and assign new color
 		glClear(GL_COLOR_BUFFER_BIT);
+
+        glBindVertexArray(VAO);
+
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
