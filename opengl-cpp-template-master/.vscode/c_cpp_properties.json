@@ -3,7 +3,7 @@
       {
         "name": "Mac",
         "includePath": ["${workspaceFolder}/**"],
-        "defines": [],
+        "defines": ["SHADER_H"],
         "macFrameworkPath": [
           "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
         ],

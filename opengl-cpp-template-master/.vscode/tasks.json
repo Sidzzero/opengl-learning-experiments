@@ -10,6 +10,7 @@
                 "-std=c++17",
                 "-I./include",
                 "-L./lib",
+                "-L./Header/shader.h",
                // "src/*.cpp",
                 "src/glad.c",
                // "-lglfw3dll",
