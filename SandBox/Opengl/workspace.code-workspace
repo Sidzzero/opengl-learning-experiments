@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "Sandbox"
+		}
+	],
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "CppBuild",
+				"type": "shell",
+				"command": "echo Hello"
+			}
+		]
+	}
+}
