@@ -11,7 +11,6 @@
 
 Shader:: Shader(const char *vertexShader , const char *fragmentShader)
 {
-    
     //Load the File contents<For reading the file>
     std::ifstream vertexFile;
     std::ifstream fragmentFile;
@@ -87,7 +86,6 @@ Shader:: Shader(const char *vertexShader , const char *fragmentShader)
      {
          return;
      }
-    
     
     //Link
     programID = glCreateProgram();

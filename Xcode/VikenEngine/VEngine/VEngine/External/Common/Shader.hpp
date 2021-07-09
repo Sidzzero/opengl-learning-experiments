@@ -28,7 +28,6 @@ public:
     void Use();
     
     //UTITILITY
-    
     void SetUniformVec4(const char * name, GLfloat x ,GLfloat y, GLfloat z, GLfloat w);
    
     

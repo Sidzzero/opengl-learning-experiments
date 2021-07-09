@@ -88,29 +88,7 @@ unsigned int rectIndices[]=
     2,3,0
 };
 
-const char *vertexSHaderSource =
-"#version 330 core\n"
-"layout(location = 0) in vec3 aPos;\n"
-"layout(location = 1) in vec3 aCol;\n"
-"out vec4 outCol;\n"
-"void main()\n"
-"{\n"
-"outCol = vec4(aCol.x,aCol.y,aCol.z, 0.0);\n"
-"// outCol = vec4(aCol.x,aCol.y,aCol.z, 0.0);\n"
-"gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
 
-"}\0";
-const char *fragmentShaderSource=
-"#version 330  core\n"
-"in vec4 outCol;\n"
-"out vec4 FragColor;\n"
-"uniform vec4 TimedColor;\n"
-"void main()\n"
-"{\n"
-"FragColor = vec4(1.0f,0.5f,0.2f,1.0f);\n"
-"FragColor = outCol;\n"
-"FragColor = TimedColor;\n"
-"}\0";
 
 
 int main(int argc, const char * argv[])
@@ -151,9 +129,6 @@ int main(int argc, const char * argv[])
     //IMGUI DECLARATIONS
     initIMGUI(window);
     
-    
-    
-
     //1.VBO usage
     /*
     unsigned int VAOTriangle1;
@@ -218,7 +193,7 @@ int main(int argc, const char * argv[])
     glEnableVertexAttribArray(0);
     
     // Texture Setup
-   glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,5*sizeof(GL_FLOAT),(GLvoid*)(3*sizeof(GL_FLOAT)));
+    glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,5*sizeof(GL_FLOAT),(GLvoid*)(3*sizeof(GL_FLOAT)));
     glEnableVertexAttribArray(1);
     
     glGenBuffers(1,&eboTexRectangle);
@@ -237,17 +212,12 @@ int main(int argc, const char * argv[])
       glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MAG_FILTER,GL_LINEAR);
     
     int iWidth , iHeight,nChannels;
-   
-   // std::cout<<"test not loaded!"<<stbi_failure_reason()<<std::endl;
  stbi_set_flip_vertically_on_load(true); 
     unsigned char *data = stbi_load("/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/VEngine/External/container.jpg",&iWidth,&iHeight,&nChannels,0);
     
     if(data)
     {
-       
         glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,data);//THIS HAS TO BE BYTE!!!!
-        
-       // glGenerateMipMap(GL_TEXTURE_2D);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     else
@@ -262,55 +232,6 @@ int main(int argc, const char * argv[])
     ///
         Shader simpleTextureShader("//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.vs","//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.fs");
     
-    
-    unsigned int vertexShader;
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader,1,&vertexSHaderSource,NULL);
-    glCompileShader(vertexShader);
-    
-    int sucess;
-    char infoLog[512];
-    glGetShaderiv(vertexShader,GL_COMPILE_STATUS,&sucess);
-    if(sucess == false)
-    {
-        glGetShaderInfoLog(vertexShader,512,NULL,infoLog);
-        std::cout<<"Error:in Vertex Shader:Compilation_Failed\n"<<infoLog<<std::endl;
-        return -1;
-    }
-    unsigned int fragmentShader;
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader,1,&fragmentShaderSource,NULL);
-    glCompileShader(fragmentShader);
-    
-    glGetShaderiv(fragmentShader,GL_COMPILE_STATUS,&sucess);
-    if(sucess == false)
-    {
-        glGetShaderInfoLog(fragmentShader,512,NULL,infoLog);
-        std::cout<<"Error:in Fragment Shader:Compilation_Failed\n"<<infoLog<<std::endl;
-        return -1;
-    }
-    
-    unsigned int shaderProgram;
-    shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram,vertexShader);
-    glAttachShader(shaderProgram,fragmentShader);
-    glLinkProgram(shaderProgram);
-    
-    glGetProgramiv(shaderProgram,GL_LINK_STATUS,&sucess);
-    if(sucess == false)
-    {
-        glGetProgramInfoLog(shaderProgram,512,NULL,infoLog);
-        std::cout<<"Error:in Linking both Shader:Linker Failed\n"<<infoLog<<std::endl;
-        return -1;
-        
-    }
-    std::cout<<"## All Shader Compiled Sucessfully!";
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-    
-      //Uniform Variable
-    GLuint uniformTimedColorLocation = glGetUniformLocation(shaderProgram,"TimedColor");
-
     //IMGUI
  
       ImVec4 ObjectColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
@@ -320,6 +241,7 @@ int main(int argc, const char * argv[])
     trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
     vec = trans * vec;
     std::cout <<"Values:"<< vec.x << vec.y << vec.z << ":END"<<std::endl;
+    
     // Loop until the user closes the window
        while(!glfwWindowShouldClose(window))
        {
