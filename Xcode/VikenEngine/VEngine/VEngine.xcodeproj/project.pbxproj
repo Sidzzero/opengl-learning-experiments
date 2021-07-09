@@ -19,6 +19,8 @@
 		342DEC6D25933D5C0065AB5E /* libglfw.3.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 342DEC6B25933D5C0065AB5E /* libglfw.3.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		342DEC7025933DF20065AB5E /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 342DEC6F25933DF20065AB5E /* glad.c */; };
 		34BE710D2698C52E00196D7B /* VBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34BE710C2698C52E00196D7B /* VBO.cpp */; };
+		34BE71102698C75700196D7B /* EBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34BE710E2698C75700196D7B /* EBO.cpp */; };
+		34BE71132698C98900196D7B /* VAO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34BE71112698C98900196D7B /* VAO.cpp */; };
 		34C7301925C5D80200B62E9B /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34C7301725C5D80200B62E9B /* Shader.cpp */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,10 @@
 		345BDCCC25D7AD4600954091 /* std_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = std_image.h; sourceTree = "<group>"; };
 		34BE710B2698C3BB00196D7B /* VBO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VBO.h; sourceTree = "<group>"; };
 		34BE710C2698C52E00196D7B /* VBO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VBO.cpp; sourceTree = "<group>"; };
+		34BE710E2698C75700196D7B /* EBO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EBO.cpp; sourceTree = "<group>"; };
+		34BE710F2698C75700196D7B /* EBO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EBO.h; sourceTree = "<group>"; };
+		34BE71112698C98900196D7B /* VAO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VAO.cpp; sourceTree = "<group>"; };
+		34BE71122698C98900196D7B /* VAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VAO.h; sourceTree = "<group>"; };
 		34C7301725C5D80200B62E9B /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Shader.cpp; path = Common/Shader.cpp; sourceTree = "<group>"; };
 		34C7301825C5D80200B62E9B /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Shader.hpp; path = Common/Shader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +99,10 @@
 				345BDCCC25D7AD4600954091 /* std_image.h */,
 				34BE710B2698C3BB00196D7B /* VBO.h */,
 				34BE710C2698C52E00196D7B /* VBO.cpp */,
+				34BE710E2698C75700196D7B /* EBO.cpp */,
+				34BE710F2698C75700196D7B /* EBO.h */,
+				34BE71112698C98900196D7B /* VAO.cpp */,
+				34BE71122698C98900196D7B /* VAO.h */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -215,10 +225,12 @@
 			files = (
 				3417E80525BEFF080049B434 /* imgui_impl_glfw.cpp in Sources */,
 				34BE710D2698C52E00196D7B /* VBO.cpp in Sources */,
+				34BE71132698C98900196D7B /* VAO.cpp in Sources */,
 				342DEC62259338A90065AB5E /* main.cpp in Sources */,
 				3417E80225BEFF080049B434 /* imgui.cpp in Sources */,
 				3417E80725BEFF080049B434 /* imgui_draw.cpp in Sources */,
 				34C7301925C5D80200B62E9B /* Shader.cpp in Sources */,
+				34BE71102698C75700196D7B /* EBO.cpp in Sources */,
 				3417E80125BEFF080049B434 /* imgui_widgets.cpp in Sources */,
 				3417E80425BEFF080049B434 /* imgui_tables.cpp in Sources */,
 				3417E80625BEFF080049B434 /* imgui_demo.cpp in Sources */,

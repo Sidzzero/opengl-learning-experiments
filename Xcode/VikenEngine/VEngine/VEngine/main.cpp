@@ -25,6 +25,8 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "VBO.h"
+#include "EBO.h"
+#include "VAO.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
