@@ -339,7 +339,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					"/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/Dependencies/**",
+					"/Users/Srikanth_Siddhu/UnityProjects/Opengl_ngu/SourceControlled/Xcode/VikenEngine/VEngine/Dependencies/**",
+					"/Users/Srikanth_Siddhu/UnityProjects/Opengl_ngu/SourceControlled/Xcode/VikenEngine/VEngine/Dependencies/glm/glm/**",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -350,6 +351,7 @@
 					/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/Dependencies,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/Users/Srikanth_Siddhu/UnityProjects/Opengl_ngu/SourceControlled/Xcode/VikenEngine/VEngine/Dependencies/glm/glm/**";
 			};
 			name = Debug;
 		};
@@ -359,7 +361,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					"/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/Dependencies/**",
+					"/Users/Srikanth_Siddhu/UnityProjects/Opengl_ngu/SourceControlled/Xcode/VikenEngine/VEngine/Dependencies/**",
+					"/Users/Srikanth_Siddhu/UnityProjects/Opengl_ngu/SourceControlled/Xcode/VikenEngine/VEngine/Dependencies/glm/glm/**",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -370,6 +373,7 @@
 					/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/Dependencies,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/Users/Srikanth_Siddhu/UnityProjects/Opengl_ngu/SourceControlled/Xcode/VikenEngine/VEngine/Dependencies/glm/glm/**";
 			};
 			name = Release;
 		};

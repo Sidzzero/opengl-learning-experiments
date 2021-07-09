@@ -19,6 +19,12 @@
 #include "std_image.h"
 
 #include "Shader.hpp"
+//Math declaration
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window );
@@ -323,6 +329,7 @@ int main(int argc, const char * argv[])
                 ImGui_ImplOpenGL3_NewFrame();
                 ImGui_ImplGlfw_NewFrame();
                 ImGui::NewFrame();
+           
           auto time = glfwGetTime();
            
            // -1 to +1
