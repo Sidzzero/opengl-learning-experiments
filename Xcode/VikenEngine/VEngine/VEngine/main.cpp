@@ -314,6 +314,12 @@ int main(int argc, const char * argv[])
     //IMGUI
  
       ImVec4 ObjectColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    
+    glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
+    glm::mat4 trans = glm::mat4(1.0f);
+    trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
+    vec = trans * vec;
+    std::cout <<"Values:"<< vec.x << vec.y << vec.z << ":END"<<std::endl;
     // Loop until the user closes the window
        while(!glfwWindowShouldClose(window))
        {
