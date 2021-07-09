@@ -24,6 +24,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "VBO.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -146,7 +147,7 @@ int main(int argc, const char * argv[])
     glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(GLvoid*) (3*sizeof(float)));
 */
   
-                          
+                 
     //2.EBO Usage
      unsigned int VAORectangle;
      unsigned int vboRectangle;

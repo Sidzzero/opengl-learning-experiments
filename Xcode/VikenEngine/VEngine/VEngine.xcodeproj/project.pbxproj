@@ -18,6 +18,7 @@
 		342DEC6C25933D5C0065AB5E /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 342DEC6B25933D5C0065AB5E /* libglfw.3.3.dylib */; };
 		342DEC6D25933D5C0065AB5E /* libglfw.3.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 342DEC6B25933D5C0065AB5E /* libglfw.3.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		342DEC7025933DF20065AB5E /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 342DEC6F25933DF20065AB5E /* glad.c */; };
+		34BE710D2698C52E00196D7B /* VBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34BE710C2698C52E00196D7B /* VBO.cpp */; };
 		34C7301925C5D80200B62E9B /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34C7301725C5D80200B62E9B /* Shader.cpp */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		342DEC6B25933D5C0065AB5E /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../../../../usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		342DEC6F25933DF20065AB5E /* glad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glad.c; path = Dependencies/glad/src/glad.c; sourceTree = SOURCE_ROOT; };
 		345BDCCC25D7AD4600954091 /* std_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = std_image.h; sourceTree = "<group>"; };
+		34BE710B2698C3BB00196D7B /* VBO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VBO.h; sourceTree = "<group>"; };
+		34BE710C2698C52E00196D7B /* VBO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VBO.cpp; sourceTree = "<group>"; };
 		34C7301725C5D80200B62E9B /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Shader.cpp; path = Common/Shader.cpp; sourceTree = "<group>"; };
 		34C7301825C5D80200B62E9B /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Shader.hpp; path = Common/Shader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +91,8 @@
 				34C7301725C5D80200B62E9B /* Shader.cpp */,
 				34C7301825C5D80200B62E9B /* Shader.hpp */,
 				345BDCCC25D7AD4600954091 /* std_image.h */,
+				34BE710B2698C3BB00196D7B /* VBO.h */,
+				34BE710C2698C52E00196D7B /* VBO.cpp */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3417E80525BEFF080049B434 /* imgui_impl_glfw.cpp in Sources */,
+				34BE710D2698C52E00196D7B /* VBO.cpp in Sources */,
 				342DEC62259338A90065AB5E /* main.cpp in Sources */,
 				3417E80225BEFF080049B434 /* imgui.cpp in Sources */,
 				3417E80725BEFF080049B434 /* imgui_draw.cpp in Sources */,
