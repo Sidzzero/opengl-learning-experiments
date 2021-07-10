@@ -14,13 +14,13 @@
 class VAO
 {
 public:
-    GLuint ID;
     VAO();
+    GLuint ID;
     
-    void LinkVBO(VBO vboID , GLuint layout);
+    void LinkAttrib(VBO vboID , GLuint layout, GLuint compNum , GLenum type , GLsizei stride,void *offset);
     void Bind();
     void Unbind();
     void Delete();
     
-}
+};
 #endif /* VAO_hpp */

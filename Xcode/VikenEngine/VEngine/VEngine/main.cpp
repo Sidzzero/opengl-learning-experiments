@@ -62,13 +62,13 @@ float rectVertices[] = {
 GLfloat rectVertices[] = {
     // first triangle
     // X , Y ,Z          //R , G , B
-     0.5f,  0.5f, 0.0f,  1.0f ,0, 0.0f,  // top right
+     0.5f,  0.5f, 0.0f,  1.0f ,0.0f, 0.0f,  // top right
     // X , Y ,Z          //R , G , B
-    0.5f, -0.5f, 0.0f,  0.0f ,1, 0.0f,  // bottom left
+    0.5f, -0.5f, 0.0f,  0.0f ,0.0f, 1.0f,  // bottom left
     // X , Y ,Z          //R , G , B
-    -0.5f, -0.5f, 0.0f,  0.0f ,0, 1.0f,  // bottom right
+    -0.5f, -0.5f, 0.0f,  0.0f ,0.0f, 1.0f,  // bottom right
      // X , Y ,Z          //R , G , B
-    -0.5f,  0.5f, 0.0f,  0.5f ,0.5f, 0.5f,   // top left
+    -0.5f,  0.5f, 0.0f,  1.0f ,0.0f, 0.0f,   // top left
 };
 
 GLfloat rectVerticesWithTexture[] = {
@@ -131,23 +131,7 @@ int main(int argc, const char * argv[])
     }
     //IMGUI DECLARATIONS
     initIMGUI(window);
-    
-    //1.VBO usage
-    /*
-    unsigned int VAOTriangle1;
-    unsigned int  vboTriangle;
-    glGenVertexArrays(1,&VAOTriangle1);
-    
-    glBindVertexArray(VAOTriangle1);
- 
-    glGenBuffers(1,&vboTriangle);
-    glBindBuffer(GL_ARRAY_BUFFER,vboTriangle);
-    glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-      glEnableVertexAttribArray(1);
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
-    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(GLvoid*) (3*sizeof(float)));
-*/
+
   
                  
     //2.EBO Usage
@@ -168,7 +152,7 @@ int main(int argc, const char * argv[])
   // REFEREMCE :https://stackoverflow.com/questions/48787190/how-to-color-triangles-with-indexed-vertices
     glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 6*sizeof(GLfloat), (GLvoid*) 0);
     glEnableVertexAttribArray(0);
-    
+    // layout , componenets, type , nrmal, total size , stride
     glVertexAttribPointer(1,3, GL_FLOAT, GL_FALSE, 6*sizeof(GLfloat),(GLvoid*) (3*sizeof(GLfloat) ));
     glEnableVertexAttribArray(1);
     
@@ -230,10 +214,25 @@ int main(int argc, const char * argv[])
     }
     stbi_image_free(data);
         //Shader Program
- 
+ //REFACTORED place
     Shader simpleUniformShader("//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.vs","//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.fs");
     ///
-        Shader simpleTextureShader("//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.vs","//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.fs");
+        Shader simpleTextureShader("//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.vs","//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.fs");
+    
+    Shader simpleShader("//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.vs","//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.fs");
+    
+    VAO vao;
+    vao.Bind();
+    VBO vbo(rectVertices,sizeof(rectVertices));
+    EBO ebo(rectIndices,sizeof(rectIndices));
+    
+  
+    vao.LinkAttrib(vbo,0, 3, GL_FLOAT, 6*sizeof(GLfloat),(void*) 0);
+    vao.LinkAttrib(vbo,1, 3, GL_FLOAT, 6*sizeof(GLfloat),(void*) (sizeof(GLfloat)*3));
+    ebo.Bind();
+    vao.Unbind();
+  
+    
     
     //IMGUI
  
@@ -275,9 +274,9 @@ int main(int argc, const char * argv[])
           
            glUniform4f(uniformTimedColorLocation , 0.0f,greenValue,0.0f,1.0f);//Should be used after USE PROGRAM
             */
-           simpleUniformShader.Use();
-           simpleUniformShader.SetUniformVec4("TimedColor", ObjectColor.x,ObjectColor.y ,ObjectColor.z, ObjectColor.w);
-            simpleUniformShader.SetUniformVec4("TimedPos", SinValue/2.0f,CosValue/2.0f ,0.0f, 1.0f);
+          // simpleUniformShader.Use();
+         //  simpleUniformShader.SetUniformVec4("TimedColor", ObjectColor.x,ObjectColor.y ,ObjectColor.z, ObjectColor.w);
+         //   simpleUniformShader.SetUniformVec4("TimedPos", SinValue/2.0f,CosValue/2.0f ,0.0f, 1.0f);
            //1.VBO example
           // glBindVertexArray(VAOTriangle1);
           // glDrawArrays(GL_TRIANGLES,0,3);
@@ -290,10 +289,14 @@ int main(int argc, const char * argv[])
           glActiveTexture(GL_TEXTURE0);
           glBindTexture(GL_TEXTURE_2D, texContainer);
            //3. Texture
-           simpleTextureShader.Use();
-           glBindVertexArray(VAOTexRectangle);
+        //   simpleTextureShader.Use();
+           simpleShader.Use();
+          // glBindVertexArray(VAOTexRectangle); //Working line
+         //  simpleShader.Use();
+           vao.Bind();
            glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
-
+           //glDrawArrays(GL_TRIANGLES,0,6);
+           vao.Unbind();
            //IMGUI
            // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
                   {

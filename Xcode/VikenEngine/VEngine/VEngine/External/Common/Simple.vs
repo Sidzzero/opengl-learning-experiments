@@ -6,11 +6,11 @@ layout(location = 1) in vec3 aCol;
 
 uniform vec4 TimedPos;
 
-out vec4 outCol;
+out vec3 outCol;
 
 void main()
 {
-outCol = vec4(aCol.x , aCol.y ,aCol.z,0.0);
-gl_Position  = vec4(aPos.x , aPos.y, aPos.z,1.0) + 
-               vec4(TimedPos.x,TimedPos.y,0.0f,0.0f);
+outCol = vec3(aCol.x , aCol.y ,aCol.z);
+    gl_Position  = vec4(aPos.x , aPos.y, aPos.z,1.0);// +
+             //  vec4(TimedPos.x,TimedPos.y,0.0f,0.0f);
 }

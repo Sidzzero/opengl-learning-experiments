@@ -9,6 +9,6 @@ uniform vec4 TimedColor;
 void main()
 {
 
-FragColor = vec4(TimedColor.x , TimedColor.y ,TimedColor.z,TimedColor.w);
-
+//FragColor = vec4(TimedColor.x , TimedColor.y ,TimedColor.z,TimedColor.w);
+    FragColor = vec4(outCol,1.0);
 }
