@@ -133,59 +133,19 @@ int main(int argc, const char * argv[])
     initIMGUI(window);
 
   
-                 
-    //2.EBO Usage
-     unsigned int VAORectangle;
-     unsigned int vboRectangle;
-     unsigned int eboRectangle;
     
-     glGenVertexArrays(1, &VAORectangle);
-     glBindVertexArray(VAORectangle);
-    
-    glGenBuffers(1,&vboRectangle);
-    glBindBuffer(GL_ARRAY_BUFFER,vboRectangle);
-    glBufferData(GL_ARRAY_BUFFER,sizeof(rectVertices),rectVertices,GL_STATIC_DRAW);
-    
-    
-    
+
     
   // REFEREMCE :https://stackoverflow.com/questions/48787190/how-to-color-triangles-with-indexed-vertices
-    glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 6*sizeof(GLfloat), (GLvoid*) 0);
-    glEnableVertexAttribArray(0);
-    // layout , componenets, type , nrmal, total size , stride
-    glVertexAttribPointer(1,3, GL_FLOAT, GL_FALSE, 6*sizeof(GLfloat),(GLvoid*) (3*sizeof(GLfloat) ));
-    glEnableVertexAttribArray(1);
-    
-    glGenBuffers(1,&eboRectangle);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,eboRectangle );
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(rectIndices), rectIndices ,GL_STATIC_DRAW);
    
-  //3.With VAO ,rectangle and also texutes
-    unsigned int VAOTexRectangle;
-     unsigned int vboTexRectangle;
-     unsigned int eboTexRectangle;
-    
-    glGenVertexArrays(1,&VAOTexRectangle);
-    glBindVertexArray(VAOTexRectangle);
-    
-    glGenBuffers(1,&vboTexRectangle);
-    glBindBuffer(GL_ARRAY_BUFFER ,vboTexRectangle);
-    glBufferData(GL_ARRAY_BUFFER , sizeof(rectVerticesWithTexture),rectVerticesWithTexture,GL_STATIC_DRAW);
-    
-    //Setup attrib pointer
-   
-    
-   //Vertex Atrribute
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,5*sizeof(GL_FLOAT),(GLvoid*)0);
-    glEnableVertexAttribArray(0);
     
     // Texture Setup
-    glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,5*sizeof(GL_FLOAT),(GLvoid*)(3*sizeof(GL_FLOAT)));
-    glEnableVertexAttribArray(1);
+ //   glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,5*sizeof(GL_FLOAT),(GLvoid*)(3*sizeof(GL_FLOAT)));
+//    glEnableVertexAttribArray(1);
     
-    glGenBuffers(1,&eboTexRectangle);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,eboTexRectangle);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER , sizeof(rectIndices),rectIndices,GL_STATIC_DRAW);
+//    glGenBuffers(1,&eboTexRectangle);
+ //   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,eboTexRectangle);
+//    glBufferData(GL_ELEMENT_ARRAY_BUFFER , sizeof(rectIndices),rectIndices,GL_STATIC_DRAW);
     
    
     
@@ -199,7 +159,7 @@ int main(int argc, const char * argv[])
       glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MAG_FILTER,GL_LINEAR);
     
     int iWidth , iHeight,nChannels;
- stbi_set_flip_vertically_on_load(true); 
+   stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load("/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/VEngine/External/container.jpg",&iWidth,&iHeight,&nChannels,0);
     
     if(data)
@@ -231,11 +191,19 @@ int main(int argc, const char * argv[])
     vao.LinkAttrib(vbo,1, 3, GL_FLOAT, 6*sizeof(GLfloat),(void*) (sizeof(GLfloat)*3));
     ebo.Bind();
     vao.Unbind();
-  
+    
+    VAO vaoText;
+    vaoText.Bind();
+    VBO vboTex(rectVerticesWithTexture,sizeof((rectVerticesWithTexture)));
+    EBO eboText(rectIndices,sizeof(rectIndices));
+    
+    vao.LinkAttrib(vboTex, 0, 3, GL_FLOAT, 5*sizeof((GL_FLOAT)), 0);
+    vao.LinkAttrib(vboTex, 1, 2, GL_FLOAT, 5*sizeof((GL_FLOAT)), (void*)(sizeof(GLfloat)*3));
+    vaoText.Unbind();
     
     
     //IMGUI
- 
+
       ImVec4 ObjectColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     
     glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
@@ -262,41 +230,26 @@ int main(int argc, const char * argv[])
            
           auto time = glfwGetTime();
            
-           // -1 to +1
-           auto SinValue =sin(time);
-           auto CosValue = cos(time);
-              // 0 to 1
-          // auto TimedSinPos = (SinValue/2.0f)+0.5;
-          // auto TimedCosPos = (CosValue/2.0f)+0.5;
-           //Manually Shader Loading!
-           /*
-           glUseProgram(shaderProgram);
-          
-           glUniform4f(uniformTimedColorLocation , 0.0f,greenValue,0.0f,1.0f);//Should be used after USE PROGRAM
-            */
-          // simpleUniformShader.Use();
-         //  simpleUniformShader.SetUniformVec4("TimedColor", ObjectColor.x,ObjectColor.y ,ObjectColor.z, ObjectColor.w);
-         //   simpleUniformShader.SetUniformVec4("TimedPos", SinValue/2.0f,CosValue/2.0f ,0.0f, 1.0f);
-           //1.VBO example
-          // glBindVertexArray(VAOTriangle1);
-          // glDrawArrays(GL_TRIANGLES,0,3);
-           
-           //2. EBO Example
-          
-           //glBindVertexArray(VAORectangle);
-           
-           //glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
+     
+         
           glActiveTexture(GL_TEXTURE0);
           glBindTexture(GL_TEXTURE_2D, texContainer);
-           //3. Texture
-        //   simpleTextureShader.Use();
+          simpleTextureShader.Use();
+        
+           vaoText.Bind();
+           glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+           
+           //glBindTexture(GL_TEXTURE_2D,0);
+           
+         /*
            simpleShader.Use();
-          // glBindVertexArray(VAOTexRectangle); //Working line
-         //  simpleShader.Use();
            vao.Bind();
            glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
            //glDrawArrays(GL_TRIANGLES,0,6);
            vao.Unbind();
+           
+           */
+           
            //IMGUI
            // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
                   {
