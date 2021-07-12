@@ -82,7 +82,21 @@ GLfloat rectVerticesWithTexture[] = {
      // X , Y ,Z
     -0.5f,  0.5f, 0.0f,  0.0f , 1.0f  // top left
 };
-
+GLfloat rectVerticesWithTextureNonEBO[] = {
+    // first triangle
+    // X , Y ,Z           //u   //v
+     0.5f,  0.5f, 0.0f,  1.0f ,1.0f, // top right
+    // X , Y ,Z
+    0.5f, -0.5f, 0.0f,   1.0f  , 0.0f,// bottom right
+    // X , Y ,Z
+    -0.5f, -0.5f, 0.0f,  0.0f,0.0f, // bottom Left
+     // X , Y ,Z
+    //NEXT
+    -0.5f,  0.5f, 0.0f,  0.0f , 1.0f , // top left
+    
+    0.5f,  0.5f, 0.0f,  1.0f ,1.0f, // top right
+    -0.5f, -0.5f, 0.0f,  0.0f,0.0f // bottom Left
+};
 
 //HOW Should the indexs be?
 unsigned int rectIndices[]=
@@ -180,7 +194,7 @@ int main(int argc, const char * argv[])
         Shader simpleTextureShader("//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.vs","//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.fs");
     
     Shader simpleShader("//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.vs","//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.fs");
-    
+    /*
     VAO vao;
     vao.Bind();
     VBO vbo(rectVertices,sizeof(rectVertices));
@@ -191,14 +205,17 @@ int main(int argc, const char * argv[])
     vao.LinkAttrib(vbo,1, 3, GL_FLOAT, 6*sizeof(GLfloat),(void*) (sizeof(GLfloat)*3));
     ebo.Bind();
     vao.Unbind();
-    
+    */
+    //---------------
     VAO vaoText;
     vaoText.Bind();
-    VBO vboTex(rectVerticesWithTexture,sizeof((rectVerticesWithTexture)));
-    EBO eboText(rectIndices,sizeof(rectIndices));
     
-    vao.LinkAttrib(vboTex, 0, 3, GL_FLOAT, 5*sizeof((GL_FLOAT)), 0);
-    vao.LinkAttrib(vboTex, 1, 2, GL_FLOAT, 5*sizeof((GL_FLOAT)), (void*)(sizeof(GLfloat)*3));
+    VBO vboTex(rectVerticesWithTextureNonEBO,sizeof((rectVerticesWithTextureNonEBO)));
+    EBO eboText(rectIndices,sizeof(rectIndices));
+   // eboText.Bind();
+    //USES VOB
+    vaoText.LinkAttrib(vboTex, 0, 3, GL_FLOAT, 5*sizeof(GLfloat), 0);
+    vaoText.LinkAttrib(vboTex, 1, 2, GL_FLOAT, 5*sizeof(GLfloat), (void*)(sizeof(GLfloat)*3));
     vaoText.Unbind();
     
     
@@ -232,13 +249,15 @@ int main(int argc, const char * argv[])
            
      
          
-          glActiveTexture(GL_TEXTURE0);
+         glActiveTexture(GL_TEXTURE0);
           glBindTexture(GL_TEXTURE_2D, texContainer);
           simpleTextureShader.Use();
         
            vaoText.Bind();
-           glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-           
+           glPointSize(25.0f);
+         //  glDrawElements(GL_POINTS, 6, GL_UNSIGNED_INT, 0);
+           glDrawArrays(GL_TRIANGLES,0,6);
+          // glDrawArrays(GL_TRIANGLE_FAN,0,6);
            //glBindTexture(GL_TEXTURE_2D,0);
            
          /*
@@ -247,8 +266,8 @@ int main(int argc, const char * argv[])
            glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
            //glDrawArrays(GL_TRIANGLES,0,6);
            vao.Unbind();
-           
            */
+           
            
            //IMGUI
            // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
