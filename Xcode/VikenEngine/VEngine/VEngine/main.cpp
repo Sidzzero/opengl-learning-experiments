@@ -147,55 +147,16 @@ int main(int argc, const char * argv[])
     }
     //IMGUI DECLARATIONS
     initIMGUI(window);
-
-  
-    
-
     
   // REFEREMCE :https://stackoverflow.com/questions/48787190/how-to-color-triangles-with-indexed-vertices
-   
-    
-    // Texture Setup
- //   glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,5*sizeof(GL_FLOAT),(GLvoid*)(3*sizeof(GL_FLOAT)));
-//    glEnableVertexAttribArray(1);
-    
-//    glGenBuffers(1,&eboTexRectangle);
- //   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,eboTexRectangle);
-//    glBufferData(GL_ELEMENT_ARRAY_BUFFER , sizeof(rectIndices),rectIndices,GL_STATIC_DRAW);
-    
-   
-    
-    GLuint  texContainer;
-    glGenTextures(1,&texContainer);
-    glBindTexture(GL_TEXTURE_2D,texContainer);
-    
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S, GL_REPEAT);
-      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-      glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-    
-    int iWidth , iHeight,nChannels;
-   stbi_set_flip_vertically_on_load(true);
-    unsigned char *data = stbi_load("/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/VEngine/External/container.jpg",&iWidth,&iHeight,&nChannels,0);
-    
-    if(data)
-    {
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,data);//THIS HAS TO BE BYTE!!!!
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout<<"Image not loaded!"<<stbi_failure_reason()<<std::endl;
-        return -1;
-    }
-    stbi_image_free(data);
-    
+       
     Texture tex("/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/VEngine/External/container.jpg" ,0,GL_TEXTURE_2D,GL_RGB,GL_UNSIGNED_BYTE);
         //Shader Program
  //REFACTORED place
     Shader simpleUniformShader("//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.vs","//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.fs");
     ///
         Shader simpleTextureShader("//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.vs","//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.fs");
+    
     tex.texunit(simpleTextureShader, "tex0", 0);
     
     Shader simpleShader("//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.vs","//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.fs");
@@ -213,10 +174,9 @@ int main(int argc, const char * argv[])
     vaoText.Unbind();
     
    
-    
     //IMGUI
 
-      ImVec4 ObjectColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    ImVec4 ObjectColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     
     glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
     glm::mat4 trans = glm::mat4(1.0f);
@@ -243,19 +203,11 @@ int main(int argc, const char * argv[])
           auto time = glfwGetTime();
            
      
-         
-         glActiveTexture(GL_TEXTURE0);//Links to sampler
-          glBindTexture(GL_TEXTURE_2D, texContainer);
-         //  tex.Bind();
+          tex.Bind();
           simpleTextureShader.Use();
         
            vaoText.Bind();
-           glPointSize(25.0f);
-         //  glDrawElements(GL_POINTS, 6, GL_UNSIGNED_INT, 0);
            glDrawArrays(GL_TRIANGLES,0,6);
-          // glDrawArrays(GL_TRIANGLE_FAN,0,6);
-           //glBindTexture(GL_TEXTURE_2D,0);
-        
          /*
            simpleShader.Use();
            vao.Bind();
