@@ -19,11 +19,9 @@
 
 class Shader
 {
-private:
-    GLuint programID;
-    
     
 public:
+    GLuint programID;
     Shader(const char *vertexShader , const char *fragmentShader);
     void Use();
     

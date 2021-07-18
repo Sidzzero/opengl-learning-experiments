@@ -15,8 +15,8 @@
 #include <iostream>
 #include <math.h>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "std_image.h"
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "std_image.h"
 
 #include "Shader.hpp"
 //Math declaration
@@ -27,6 +27,8 @@
 #include "VBO.h"
 #include "EBO.h"
 #include "VAO.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "Texture.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -163,7 +165,7 @@ int main(int argc, const char * argv[])
     
    
     
-    unsigned int texContainer;
+    GLuint  texContainer;
     glGenTextures(1,&texContainer);
     glBindTexture(GL_TEXTURE_2D,texContainer);
     
@@ -187,25 +189,17 @@ int main(int argc, const char * argv[])
         return -1;
     }
     stbi_image_free(data);
+    
+    Texture tex("/Users/Srikanth_Siddhu/UnityProjects/Self/VikEngine/Xcode/VikenEngine/VEngine/VEngine/External/container.jpg" ,0,GL_TEXTURE_2D,GL_RGB,GL_UNSIGNED_BYTE);
         //Shader Program
  //REFACTORED place
     Shader simpleUniformShader("//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.vs","//Users//Srikanth_Siddhu//UnityProjects//Self/VikEngine//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.fs");
     ///
         Shader simpleTextureShader("//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.vs","//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple_Tex.fs");
+    tex.texunit(simpleTextureShader, "tex0", 0);
     
     Shader simpleShader("//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.vs","//Users//Srikanth_Siddhu//UnityProjects//Opengl_ngu//SourceControlled//Xcode//VikenEngine//VEngine//VEngine//External//Common//Simple.fs");
-    /*
-    VAO vao;
-    vao.Bind();
-    VBO vbo(rectVertices,sizeof(rectVertices));
-    EBO ebo(rectIndices,sizeof(rectIndices));
     
-  
-    vao.LinkAttrib(vbo,0, 3, GL_FLOAT, 6*sizeof(GLfloat),(void*) 0);
-    vao.LinkAttrib(vbo,1, 3, GL_FLOAT, 6*sizeof(GLfloat),(void*) (sizeof(GLfloat)*3));
-    ebo.Bind();
-    vao.Unbind();
-    */
     //---------------
     VAO vaoText;
     vaoText.Bind();
@@ -218,6 +212,7 @@ int main(int argc, const char * argv[])
     vaoText.LinkAttrib(vboTex, 1, 2, GL_FLOAT, 5*sizeof(GLfloat), (void*)(sizeof(GLfloat)*3));
     vaoText.Unbind();
     
+   
     
     //IMGUI
 
@@ -249,8 +244,9 @@ int main(int argc, const char * argv[])
            
      
          
-         glActiveTexture(GL_TEXTURE0);
+         glActiveTexture(GL_TEXTURE0);//Links to sampler
           glBindTexture(GL_TEXTURE_2D, texContainer);
+         //  tex.Bind();
           simpleTextureShader.Use();
         
            vaoText.Bind();
@@ -259,7 +255,7 @@ int main(int argc, const char * argv[])
            glDrawArrays(GL_TRIANGLES,0,6);
           // glDrawArrays(GL_TRIANGLE_FAN,0,6);
            //glBindTexture(GL_TEXTURE_2D,0);
-           
+        
          /*
            simpleShader.Use();
            vao.Bind();
@@ -342,3 +338,4 @@ void initIMGUI(GLFWwindow* window)
       ImGui_ImplGlfw_InitForOpenGL(window, true);
      ImGui_ImplOpenGL3_Init();
 }
+
