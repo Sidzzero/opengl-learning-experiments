@@ -33,7 +33,7 @@ Texture::Texture(const char *file , GLuint slot,GLenum texType,GLenum format ,GL
     glBindTexture(texType, 0);
 }
 
-void Texture:: texunit(Shader shader,const char* uniformName,GLuint unit)
+void Texture:: texunit(Shader &shader,const char* uniformName,GLuint unit)
 {
  //Uniform tells opengl which texture to use !
     GLuint uniLoc = glGetUniformLocation(shader.programID , uniformName);

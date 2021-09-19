@@ -20,7 +20,7 @@ public:
     GLuint Id;
     Texture(const char *file , GLuint slot,GLenum texType, GLenum format ,GLenum byteType );
     
-    void texunit(Shader shader,const char* uniformName,GLuint unit);
+    void texunit(Shader &shader,const char* uniformName,GLuint unit);
     void Bind();
     void Unbind();
     void Delete();
